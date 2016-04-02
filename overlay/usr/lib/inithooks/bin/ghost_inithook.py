@@ -88,7 +88,7 @@ def main():
 #    m.execute('UPDATE xoops.xoops_users SET email=\"%s\" WHERE uname=\"admin\";' % email)
 #    m.execute('UPDATE xoops.xoops_config SET conf_value=\"%s\" WHERE conf_name=\"adminmail\";' % email)
 
-    dbase = "/var/www/ghost/content/data/ghost.db"
+    dbase = "/opt/ghost/content/data/ghost.db"
     uid = "1"
     con = lite.connect(dbase)
     with con:
