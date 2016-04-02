@@ -5,3 +5,6 @@ ca-certificates
 openssl
 
 nginx
+
+python-bcrypt
+python-pysqlite2
