@@ -2,12 +2,12 @@
 
 #Config Vars
 GHOST_URL="https://ghost.org/zip/ghost-0.7.8.zip"
-GHOST_DIR="/opt/ghost/"
+GHOST_DIR="/opt/ghost"
 
 
 # Get Ghost (Stable 0.7.8)
 wget $GHOST_URL -O /tmp/ghost.zip
-unzip /tmp/ghost.zip -d $GHOST_DIR
+unzip /tmp/ghost.zip -d $GHOST_DIR/
 
 #Set node version (0.10.40 confirmed to work)
 n 0.10.40
@@ -23,7 +23,7 @@ ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 chown -R node:node $GHOST_DIR
 
 # pm2
-su -lc "GHOST-ENV=production /usr/local/bin/pm2 start --name ghost --env production /opt/ghost/index.js" node
+su -lc "GHOST-ENV=production /usr/local/bin/pm2 start --name ghost /opt/ghost/index.js" node
 rm /etc/nginx/sites-enabled/nodejs
 
 
