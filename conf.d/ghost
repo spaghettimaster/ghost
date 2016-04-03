@@ -23,7 +23,7 @@ ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 chown -R node:node $GHOST_DIR
 
 # pm2
-su -lc "GHOST-ENV=production /usr/local/bin/pm2 start --name ghost /opt/ghost/index.js" node
+su -lc "NODE_ENV=production /usr/local/bin/pm2 start --name 'ghost' /opt/ghost/index.js" node
 rm /etc/nginx/sites-enabled/nodejs
 
 
