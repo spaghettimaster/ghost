@@ -11,9 +11,9 @@ unzip /tmp/ghost.zip -d $GHOST_DIR
 
 #Set node version (0.10.40 confirmed to work)
 n 0.10.40
+mv /tmp/ghost-dev.db $GHOST_DIR/content/data/ghost.db
 cd $GHOST_DIR && /usr/local/bin/npm install --production
 
-mv /tmp/ghost-dev.db $GHOST_DIR/content/data/ghost.db
 
 #nginx considerations
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
@@ -23,7 +23,7 @@ ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 chown -R node:node $GHOST_DIR
 
 # pm2
-su -lc "/usr/local/bin/pm2 start --name ghost --env production /opt/ghost/index.js" node
+su -lc "GHOST-ENV=production /usr/local/bin/pm2 start --name ghost --env production /opt/ghost/index.js" node
 rm /etc/nginx/sites-enabled/nodejs
 
 
