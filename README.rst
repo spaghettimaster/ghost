@@ -7,11 +7,11 @@ Ghost appliance for use with TklDev
 Summary
 =========
 
-*Create a dedicated `Ghost <http://tryghost.org>`_ (blog) appliance using TklDev from `Turnkey GNU/Linux <http://turnkeylinux.org>`_. Intended to be a turnkey solution that provides a ready-to-run blogging platform upon receiving answers to a few brief, clear prompts.*
+*Create a dedicated Ghost <http://tryghost.org> (blog) appliance using TklDev from Turnkey GNU/Linux <http://turnkeylinux.org>. Intended to be a turnkey solution that provides a ready-to-run blogging platform upon receiving answers to a few brief, clear prompts.*
 
 * derived from TKL's Nodejs Appliance at https://github.com/turnkeylinux-apps/nodejs.
 
-* to be used with with TklDev (https://www.turnkeylinux.org/tkldev) to generate bootable install ISO based on `TKL Core <https://www.turnkeylinux.org/core>`_, which in turn is based on Debian "Jessie" 8.
+* to be used with with TklDev (https://www.turnkeylinux.org/tkldev) to generate bootable install ISO based on TKL Core <https://www.turnkeylinux.org/core>, which in turn is based on Debian "Jessie" 8.
 
 Details
 =======
@@ -28,8 +28,10 @@ Details
 
 * Configured in /opt/ghost, owned by "node" user (su node)
 
-.. todo::
+To Do
+======
 
-  1. Transfer useable art from another repo (previous attempt)
-  2. Clean up for initial sniff
-  3. Revise based on feedback (round 2)
+1. Transfer useable art from another repo (previous attempt)
+2. Clean up for initial sniff based on previous feedback
+3. Revise based on checklist
+3. Revise based on feedback (round 2)
