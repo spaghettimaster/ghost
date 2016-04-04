@@ -34,4 +34,5 @@ To Do
 1. Transfer useable art from another repo (previous attempt)
 2. Clean up for initial sniff based on previous feedback
 3. Revise based on checklist
-3. Revise based on feedback (round 2)
+4. Revise based on feedback (round 2)
+5. Revise README to include more detail and reflect changes made in revision process
