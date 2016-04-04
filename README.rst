@@ -1,8 +1,4 @@
-:author: Rik Goldman
 
-:title: Ghost for TKLDEV readme
-
-:date: April 4, 2016
 
 ======================================
 Ghost appliance for use with TklDev
@@ -31,3 +27,9 @@ Details
 * Configured for production environment rather than default dev env. Installs with npm install --production
 
 * Configured in /opt/ghost, owned by "node" user (su node)
+
+.. todo::
+
+  1. Transfer useable art from another repo (previous attempt)
+  2. Clean up for initial sniff
+  3. Revise based on feedback (round 2)
