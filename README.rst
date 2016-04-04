@@ -20,7 +20,7 @@ Summary
 Details
 =======
 
-* Relies on pm2_ for daemonization
+* Relies on `pm2 <http://pm2.keymetrics.io/>`_ for daemonization
 
 * In addition to packages installed by Nodjs appliance, installs *python-bcrypt* and *python-pysqlite2* (plan/main)
 
@@ -31,7 +31,3 @@ Details
 * Configured for production environment rather than default dev env. Installs with npm install --production
 
 * Configured in /opt/ghost, owned by "node" user (su node)
-
-
-
-.. _pm2:: http://pm2.keymetrics.io/
