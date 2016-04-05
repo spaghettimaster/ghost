@@ -36,3 +36,4 @@ To Do
 3. Revise based on checklist
 4. Revise based on feedback (round 2)
 5. Revise README to include more detail and reflect changes made in revision process
+6. Revise so appliance doesn't rely on db file in overlay
