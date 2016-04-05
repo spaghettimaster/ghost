@@ -1,7 +1,10 @@
 #!/bin/bash -ex
 
-#Config Vars
+###Config Vars
+
+# look for a "stable" or "latest" zip or tar
 GHOST_URL="https://ghost.org/zip/ghost-0.7.8.zip"
+# open to alternative targets
 GHOST_DIR="/opt/ghost"
 
 
@@ -9,9 +12,13 @@ GHOST_DIR="/opt/ghost"
 wget $GHOST_URL -O /tmp/ghost.zip
 unzip /tmp/ghost.zip -d $GHOST_DIR/
 
-#Set node version (0.10.40 confirmed to work)
+#Set node version (0.10.40 confirmed to work); open to higher version
 n 0.10.40
-mv /tmp/ghost-dev.db $GHOST_DIR/content/data/ghost.db
+
+# moves the prepped db: commented out to avoid db in overlay
+# mv /tmp/ghost-dev.db $GHOST_DIR/content/data/ghost.db
+
+# according to documented install
 cd $GHOST_DIR && /usr/local/bin/npm install --production
 
 
@@ -24,6 +31,8 @@ chown -R node:node $GHOST_DIR
 
 # pm2
 su -lc "NODE_ENV=production /usr/local/bin/pm2 start --name 'ghost' /opt/ghost/index.js" node
+
+# remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs
 
 
