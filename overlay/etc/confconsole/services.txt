@@ -1,5 +1,5 @@
-Ghost:      http://$ipaddr
-            http://$ipaddr/ghost
+Ghost:      https://$ipaddr
+            https://$ipaddr/ghost
 Web shell:  https://$ipaddr:12320
 Webmin:     https://$ipaddr:12321
 SSH/SFTP:   root@$ipaddr (port 22)
