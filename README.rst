@@ -7,7 +7,7 @@ Ghost appliance for use with TklDev
 Summary
 =========
 
-*Create a dedicated Ghost <http://tryghost.org> (blog) appliance using TklDev from Turnkey GNU/Linux <http://turnkeylinux.org>. Intended to be a turnkey solution that provides a ready-to-run blogging platform upon receiving answers to a few brief, clear prompts.*
+* Create a dedicated Ghost (http://tryghost.org) (blog) appliance using TklDev from Turnkey GNU/Linux (http://turnkeylinux.org). Intended to be a turnkey solution that provides a ready-to-run blogging platform upon receiving answers to a few brief, clear prompts.*
 
 * derived from TKL's Nodejs Appliance at https://github.com/turnkeylinux-apps/nodejs.
 
@@ -36,4 +36,4 @@ To Do
 3. Revise based on checklist
 4. Revise based on feedback (round 2)
 5. Revise README to include more detail and reflect changes made in revision process
-6. Revise so appliance doesn't rely on db file in overlay
+6. Revise so appliance doesn't rely on db file in overlay **DONE**
