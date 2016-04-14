@@ -3,7 +3,8 @@
 ###Config Vars
 
 # look for a "stable" or "latest" zip or tar
-GHOST_URL="https://ghost.org/zip/ghost-0.7.8.zip"
+#GHOST_URL="https://ghost.org/zip/ghost-0.7.8.zip"
+GHOST_URL="https://ghost.org/zip/ghost-latest.zip"
 # open to alternative targets
 GHOST_DIR="/opt/ghost"
 
@@ -34,5 +35,3 @@ su -lc "NODE_ENV=production /usr/local/bin/pm2 start --name 'ghost' /opt/ghost/i
 
 # remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs
-
-

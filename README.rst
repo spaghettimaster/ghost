@@ -7,9 +7,11 @@ Ghost appliance for use with TklDev
 Summary
 =========
 
-* Create a dedicated Ghost (http://tryghost.org) (blog) appliance using TklDev from Turnkey GNU/Linux (http://turnkeylinux.org). Intended to be a turnkey solution that provides a ready-to-run blogging platform upon receiving answers to a few brief, clear prompts.*
+* Create a dedicated Ghost (http://tryghost.org) (blog) appliance using TklDev from Turnkey GNU/Linux (http://turnkeylinux.org). Intended to be a turnkey solution that provides a ready-to-run blogging platform upon receiving answers to a few brief, clear prompts.
 
 * derived from TKL's Nodejs Appliance at https://github.com/turnkeylinux-apps/nodejs.
+
+* Tested on 0.7.8
 
 * to be used with with TklDev (https://www.turnkeylinux.org/tkldev) to generate bootable install ISO based on TKL Core <https://www.turnkeylinux.org/core>, which in turn is based on Debian "Jessie" 8.
 
