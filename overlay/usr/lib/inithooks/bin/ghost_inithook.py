@@ -93,10 +93,10 @@ def main():
     con = lite.connect(dbase)
     with con:
         cur = con.cursor()
-        cur.execute('UPDATE Users SET Password=\"%s\" WHERE Id="1";' % hash)
-        cur.execute('UPDATE Users SET name=\"%s\" WHERE id="1";' % uname)
-        cur.execute('UPDATE Users SET email=\"%s\" WHERE id="1";' % email)
-        cur.execute('UPDATE Users SET status=\"active\" WHERE id="1";')
+        cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
+        cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
+        cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
+        cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
