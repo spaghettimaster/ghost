@@ -3,8 +3,8 @@
 ###Config Vars
 
 # look for a "stable" or "latest" zip or tar
-GHOST_URL="https://ghost.org/zip/ghost-0.7.8.zip"
-#GHOST_URL="https://ghost.org/zip/ghost-latest.zip"
+#GHOST_URL="https://ghost.org/zip/ghost-0.7.8.zip"
+GHOST_URL="https://ghost.org/zip/ghost-latest.zip"
 # open to alternative targets
 GHOST_DIR="/opt/ghost"
 
@@ -31,7 +31,7 @@ ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 chown -R node:node $GHOST_DIR
 
 # pm2
-su -lc "NODE_ENV=production /usr/local/bin/pm2 start --name 'ghost' /opt/ghost/index.js" node
+su -c "NODE_ENV=production /usr/local/bin/pm2 start --name 'ghost' /opt/ghost/index.js" node
 
 # remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs
