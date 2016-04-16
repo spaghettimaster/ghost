@@ -20,6 +20,7 @@ n 0.10.40
 # mv /tmp/ghost-dev.db $GHOST_DIR/content/data/ghost.db
 
 # according to documented install
+chown -R node:node /opt/ghost/
 cd $GHOST_DIR && su -c "/usr/local/bin/npm install --production" node
 
 
