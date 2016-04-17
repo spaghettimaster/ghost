@@ -18,8 +18,8 @@ n 0.10.40
 
 # according to documented install
 chown -R node:node /opt/ghost/
-cd $GHOST_DIR && su -c "npm install --production" node
-cd $GHOST_DIR && su -c "forever start index.js" node
+cd /opt/ghost && su -c "npm install --production" node
+
 
 
 
