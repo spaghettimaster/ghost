@@ -36,7 +36,7 @@ def main():
 
     password = ""
     email = ""
-    URL = ""
+    addy = ""
     uname = ""
 
     for opt, val in opts:
@@ -46,7 +46,7 @@ def main():
             password = val
         elif opt == '--email':
             email = val
-	elif opt == '--URL':
+	elif opt == '--addy':
 	    URL = val
         elif opt == '--username':
             uname = val
@@ -61,13 +61,13 @@ def main():
 
         email = d.get_email("Ghost Email","Enter email address for the Ghost blogger account.","admin@example.com")
 
-    if not URL:
+    if not addy:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
         URL = d.get_input(
             "Ghost URL",
             "Enter the full URL of the Ghost Blog.",
-            "http://tryghost.org")
+            "http://my-ghost-blog.org")
 
     if not uname:
         if 'd' not in locals():
@@ -83,11 +83,7 @@ def main():
 
     hash = bcrypt.hashpw(password,bcrypt.gensalt())
 
-#    m = MySQL()
-#    Saving and mocking - not used in this build
-#    m.execute('UPDATE xoops.xoops_users SET pass=\"%s\" WHERE uname=\"admin\";' % hash)
-#    m.execute('UPDATE xoops.xoops_users SET email=\"%s\" WHERE uname=\"admin\";' % email)
-#    m.execute('UPDATE xoops.xoops_config SET conf_value=\"%s\" WHERE conf_name=\"adminmail\";' % email)
+
 
     dbase = "/opt/ghost/content/data/ghost.db"
     uid = "1"
@@ -101,7 +97,7 @@ def main():
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
-        line = line.replace("http://my-ghost-blog.com",URL)
+        line = line.replace("http://my-ghost-blog.com",addy)
         print line
 
 if __name__ == "__main__":
