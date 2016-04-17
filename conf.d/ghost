@@ -18,16 +18,16 @@ n 0.10.40
 
 # according to documented install
 chown -R node:node /opt/ghost/
-cd $GHOST_DIR && su -c "/usr/local/bin/npm install --production" node
-cd $GHOST_DIR && su -c "NODE_ENV=production forever start index.js" node
-wait 30
-cd $GHOST_DIR && su c "forever stop index.js" node
+cd $GHOST_DIR && su -c "npm install --production" node
+cd $GHOST_DIR && su -c "nohup npm start > /tmp/npm-start.log" node
+npm_process=$!
+
 
 #nginx considerations
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
-
+kill -15 $npm_process
 chown -R node:node $GHOST_DIR
 
 # pm2
