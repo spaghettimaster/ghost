@@ -17,6 +17,7 @@ import bcrypt
 import sqlite3 as lite
 import locale
 import dialog
+import fileinput
 from dialog_wrapper import Dialog
 
 def usage(s=None):
