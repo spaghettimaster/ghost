@@ -27,7 +27,6 @@ cd /opt/ghost && su -c "npm install --production" node
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
-cd $GHOST_DIR && su -c "forever stop index.js" node
 chown -R node:node $GHOST_DIR
 
 # pm2
