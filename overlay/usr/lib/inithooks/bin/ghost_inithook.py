@@ -101,7 +101,7 @@ def main():
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
-        line = line.replace("http://my-ghost-blog.com",addy)
+        line = line.replace("http://my-ghost-blog.com",URL)
         print line
 
 if __name__ == "__main__":
