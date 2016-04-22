@@ -91,12 +91,13 @@ def main():
     with con:
         cur = con.cursor()
         cur.execute('INSERT INTO users ("id", "name", "password", "email") VALUES (1,"uname","hash","email");')
-"""
-        cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
-        cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
-        cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
-        cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
-"""
+        cur.execute('INSERT INTO roles_users ("id","role_id","user_id") VALUES (1,1,1);')
+
+        #cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
+        #cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
+        #cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
+        #cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
+
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
