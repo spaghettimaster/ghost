@@ -64,7 +64,7 @@ def main():
     if not addy:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
-        URL = d.get_input(
+        addy = d.get_input(
             "Ghost URL (not IP address)",
             "Enter the full URL of the Ghost Blog.",
             "http://my-ghost-blog.org")
@@ -97,7 +97,6 @@ def main():
         cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
         cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
         cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
-
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
