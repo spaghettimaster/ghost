@@ -4,7 +4,7 @@
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---URL= unless provided, will ask interactively
+--addy= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
 
 """
@@ -30,7 +30,7 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'URL=', 'uname='])
+                                       ['help', 'password=', 'email=', 'addy=', 'uname='])
     except getopt.GetoptError, e:
         usage(e)
 
@@ -47,7 +47,7 @@ def main():
         elif opt == '--email':
             email = val
 	elif opt == '--addy':
-	    URL = val
+	    addy = val
         elif opt == '--username':
             uname = val
 
@@ -90,7 +90,7 @@ def main():
     con = lite.connect(dbase)
     with con:
         cur = con.cursor()
-        cur.execute('INSERT INTO users ("uid", "name", "password", "email") VALUES (1,"uname","hash","email");')
+        cur.execute('INSERT INTO users ("id", "name", "password", "email") VALUES (1,"uname","hash","email");')
         cur.execute('INSERT INTO `roles_users`(`id`,`role_id`,`user_id`) VALUES (1,1,1);')
 	#cur.execute('UPDATE roles_users SET role_id="1" WHERE id="1";')
 	#cur.execute('UPDATE roles_users SET user_id="1" WHERE id="1";')
