@@ -90,14 +90,13 @@ def main():
     con = lite.connect(dbase)
     with con:
         cur = con.cursor()
-        cur.execute('INSERT INTO users ("id", "name", "password", "email") VALUES (1,"uname","hash","email");')
-        cur.execute('INSERT INTO `roles_users`(`id`,`role_id`,`user_id`) VALUES (1,1,1);')
-	#cur.execute('UPDATE roles_users SET role_id="1" WHERE id="1";')
-	#cur.execute('UPDATE roles_users SET user_id="1" WHERE id="1";')
-        #cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
-        #cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
-        #cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
-        #cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
+
+        cur.execute('UPDATE roles_users SET role_id="4" WHERE id="1";')
+	cur.execute('UPDATE roles_users SET user_id="1" WHERE id="1";')
+        cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
+        cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
+        cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
+        cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
