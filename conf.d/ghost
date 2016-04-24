@@ -20,16 +20,14 @@ n 0.10.40
 chown -R node:node /opt/ghost/
 cd /opt/ghost && su -c "npm install --production" node
 
-#make the db without npm install
-cd /opt/ghost && su -c "NODE_ENV=production forever start index.js" node
 
 
 
 #nginx considerations
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
-cd /opt/ghost && su -c "forever stop index.js" node
-#chown -R node:node $GHOST_DIR
+
+chown -R node:node $GHOST_DIR
 
 # pm2
 cd $GHOST_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js" node

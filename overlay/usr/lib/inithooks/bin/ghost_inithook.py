@@ -4,7 +4,7 @@
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---addy= unless provided, will ask interactively
+--URL= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
 
 """
@@ -30,7 +30,7 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'addy=', 'uname='])
+                                       ['help', 'password=', 'email=', 'URL=', 'uname='])
     except getopt.GetoptError, e:
         usage(e)
 
@@ -47,7 +47,7 @@ def main():
         elif opt == '--email':
             email = val
 	elif opt == '--addy':
-	    addy = val
+	    URL = val
         elif opt == '--username':
             uname = val
 
@@ -64,7 +64,7 @@ def main():
     if not addy:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
-        addy = d.get_input(
+        URL = d.get_input(
             "Ghost URL (not IP address)",
             "Enter the full URL of the Ghost Blog.",
             "http://my-ghost-blog.org")
@@ -90,13 +90,14 @@ def main():
     con = lite.connect(dbase)
     with con:
         cur = con.cursor()
-
-        cur.execute('UPDATE roles_users SET role_id="4" WHERE id="1";')
+        #cur.execute('INSERT INTO users ("id", "name", "password", "email") VALUES (1,"uname","hash","email");')
+        cur.execute('UPDATE roles_users SET role_id="1" WHERE id="1";')
 	cur.execute('UPDATE roles_users SET user_id="1" WHERE id="1";')
         cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
         cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
         cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
         cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
+
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
