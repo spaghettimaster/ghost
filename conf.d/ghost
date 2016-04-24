@@ -27,10 +27,12 @@ cd /opt/ghost && su -c "npm install --production" node
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
-chown -R node:node $GHOST_DIR
+cd /opt/ghost && su -c "nohup npm start --production && npm stop" node
+
 
 # pm2
 cd $GHOST_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js" node
+su -c "pm2 tklweb-cp" node
 
 # remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs
