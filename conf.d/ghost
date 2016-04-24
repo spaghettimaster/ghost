@@ -27,7 +27,8 @@ cd /opt/ghost && su -c "npm install --production" node
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
-cd /opt/ghost && su -c "nohup npm start --production & && npm stop" node
+cd /opt/ghost && su -c "nohup npm start --production &" node
+cd /opt/ghost && su -c "npm stop" node
 
 
 # pm2
