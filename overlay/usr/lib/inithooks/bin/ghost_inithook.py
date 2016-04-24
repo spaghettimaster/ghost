@@ -4,7 +4,7 @@
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---URL= unless provided, will ask interactively
+--addy= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
 
 """
