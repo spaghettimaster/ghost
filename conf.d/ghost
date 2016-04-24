@@ -33,7 +33,6 @@ cd /opt/ghost && su -c "npm stop" node
 
 # pm2
 cd $GHOST_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js" node
-su -c "pm2 stop tklweb-cp" node
 
 # remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs
