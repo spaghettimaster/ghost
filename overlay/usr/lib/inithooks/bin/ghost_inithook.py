@@ -4,7 +4,7 @@
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---addy= unless provided, will ask interactively
+--url= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
 
 """
@@ -47,7 +47,7 @@ def main():
         elif opt == '--email':
             email = val
         elif opt == '--url':
-            addy = val
+            url = val
         elif opt == '--username':
             uname = val
 
@@ -61,10 +61,10 @@ def main():
 
         email = d.get_email("Ghost Email","Enter email address for the Ghost blogger account.","admin@example.com")
 
-    if not addy:
+    if not url:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
-        addy = d.get_input(
+        url = d.get_input(
             "Ghost URL",
             "Enter the full URL of the Ghost Blog.",
             "http://my-ghost-blog.org")
