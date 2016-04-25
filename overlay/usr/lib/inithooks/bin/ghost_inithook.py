@@ -46,8 +46,8 @@ def main():
             password = val
         elif opt == '--email':
             email = val
-	    elif opt == '--addy':
-	        addy = val
+        elif opt == '--addy':
+            addy = val
         elif opt == '--username':
             uname = val
 
