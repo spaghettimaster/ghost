@@ -30,26 +30,33 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'address=', 'uname='])
+                                       ['help', 'address=', 'password=', 'email=', 'username='])
     except getopt.GetoptError, e:
         usage(e)
 
+    address = ""
     password = ""
     email = ""
-    address = ""
     uname = ""
 
     for opt, val in opts:
         if opt in ('-h', '--help'):
             usage()
+        elif opt == '--address':
+            address = val
         elif opt == '--password':
             password = val
         elif opt == '--email':
             email = val
-        elif opt == '--address':
-            address = val
         elif opt == '--username':
             uname = val
+
+
+    if not address:
+        if 'd' not in locals():
+            d = Dialog('Turnkey Linux - First boot configuration')
+
+        address = d.get_input("Ghost URL","Enter the full URL of the Ghost Blog.","http://my-ghost-blog.com")
 
     if not password:
         d = Dialog('TurnKey Linux - First boot configuration')
@@ -57,15 +64,10 @@ def main():
 
     if not email:
         if 'd' not in locals():
-            d = Dialog('TurnKey Linux - First boot configuration')
+			d = Dialog('TurnKey Linux - First boot configuration')
 
         email = d.get_email("Ghost Email","Enter email address for the Ghost blogger account.","admin@example.com")
 
-    if not address:
-        if 'd' not in locals():
-            d = Dialog('Turnkey Linux - First boot configuration')
-
-        address = d.get_input("Ghost URL","Enter the full URL of the Ghost Blog.","http://my-ghost-blog.com")
 
     if not uname:
         if 'd' not in locals():
@@ -78,6 +80,15 @@ def main():
 
 #Kept for reference
 #hash = hashlib.md5(password).hexdigest()
+
+
+    for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
+        line = line.replace("http://my-ghost-blog.com", address)
+        print line
+
+
+
+
 
     hash = bcrypt.hashpw(password,bcrypt.gensalt())
 
