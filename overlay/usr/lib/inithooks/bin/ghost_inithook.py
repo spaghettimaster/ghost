@@ -46,8 +46,8 @@ def main():
             password = val
         elif opt == '--email':
             email = val
-	elif opt == '--addy':
-	    addy = val
+	    elif opt == '--addy':
+	        addy = val
         elif opt == '--username':
             uname = val
 
@@ -90,7 +90,6 @@ def main():
     con = lite.connect(dbase)
     with con:
         cur = con.cursor()
-        #cur.execute('INSERT INTO users ("id", "name", "password", "email") VALUES (1,"uname","hash","email");')
         cur.execute('UPDATE roles_users SET user_id="4" WHERE id="1";')
         cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
         cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
