@@ -18,7 +18,8 @@ chown -R $USER:$USER $NODEAPP
 # install deps
 su $USER -lc "[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY; cd $NODEAPP && npm install"
 
-su node -lc "cd $NODEAPP && pm2 start tklweb-cp.js; sleep 5; pm2 dump; pm2 kill"
+#line for node appliance control panel
+#su node -lc "cd $NODEAPP && pm2 start tklweb-cp.js; sleep 5; pm2 dump; pm2 kill"
 
 # install examples
 mkdir -p $EXAMPLES
