@@ -1,10 +1,10 @@
 #!/usr/bin/python
-"""Set Ghost email, name, URL, password
+"""Set Ghost email, name, address, password
 
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---URL= unless provided, will ask interactively
+--address= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
 
 """
@@ -30,13 +30,13 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'URL=', 'uname='])
+                                       ['help', 'password=', 'email=', 'address=', 'uname='])
     except getopt.GetoptError, e:
         usage(e)
 
     password = ""
     email = ""
-    URL = ""
+    address = ""
     uname = ""
 
     for opt, val in opts:
@@ -46,8 +46,8 @@ def main():
             password = val
         elif opt == '--email':
             email = val
-        elif opt == '--URL':
-            URL = val
+        elif opt == '--address':
+            address = val
         elif opt == '--username':
             uname = val
 
@@ -61,11 +61,11 @@ def main():
 
         email = d.get_email("Ghost Email","Enter email address for the Ghost blogger account.","admin@example.com")
 
-    if not URL:
+    if not address:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
 
-        URL = d.get_input("Ghost URL","Enter the full URL of the Ghost Blog.","http://my-ghost-blog.com")
+        address = d.get_input("Ghost URL","Enter the full URL of the Ghost Blog.","http://my-ghost-blog.com")
 
     if not uname:
         if 'd' not in locals():
@@ -97,7 +97,7 @@ def main():
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
-        line = line.replace("http://my-ghost-blog.com", URL)
+        line = line.replace("http://my-ghost-blog.com", address)
         print line
 
 if __name__ == "__main__":
