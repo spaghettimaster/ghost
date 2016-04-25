@@ -1,10 +1,10 @@
 #!/usr/bin/python
-"""Set Ghost email, name, url, password
+"""Set Ghost email, name, URL, password
 
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---url= unless provided, will ask interactively
+--URL= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
 
 """
@@ -30,13 +30,13 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'url=', 'uname='])
+                                       ['help', 'password=', 'email=', 'URL=', 'uname='])
     except getopt.GetoptError, e:
         usage(e)
 
     password = ""
     email = ""
-    url = ""
+    URL = ""
     uname = ""
 
     for opt, val in opts:
@@ -46,8 +46,8 @@ def main():
             password = val
         elif opt == '--email':
             email = val
-        elif opt == '--url':
-            url = val
+        elif opt == '--URL':
+            URL = val
         elif opt == '--username':
             uname = val
 
@@ -61,13 +61,13 @@ def main():
 
         email = d.get_email("Ghost Email","Enter email address for the Ghost blogger account.","admin@example.com")
 
-    if not url:
+    if not URL:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
         url = d.get_input(
             "Ghost URL",
             "Enter the full URL of the Ghost Blog.",
-            "http://my-ghost-blog.org")
+            "http://ghost.local")
 
     if not uname:
         if 'd' not in locals():
@@ -86,7 +86,7 @@ def main():
 
 
     dbase = "/opt/ghost/content/data/ghost.db"
-    uid = "1"
+    #uid = "1"
     con = lite.connect(dbase)
     with con:
         cur = con.cursor()
@@ -99,7 +99,7 @@ def main():
         con.commit()
 
     for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
-        line = line.replace("http://my-ghost-blog.com",url)
+        line = line.replace("http://my-ghost-blog.com", URL)
         print line
 
 if __name__ == "__main__":
