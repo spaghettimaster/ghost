@@ -64,7 +64,7 @@ def main():
     if not URL:
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
-        url = d.get_input(
+        URL = d.get_input(
             "Ghost URL",
             "Enter the full URL of the Ghost Blog.",
             "http://ghost.local")
