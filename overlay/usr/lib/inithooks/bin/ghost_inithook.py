@@ -67,7 +67,7 @@ def main():
         URL = d.get_input(
             "Ghost URL",
             "Enter the full URL of the Ghost Blog.",
-            "http://ghost.local")
+            "https://ghost.local")
 
     if not uname:
         if 'd' not in locals():
