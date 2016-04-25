@@ -30,13 +30,13 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'addy=', 'uname='])
+                                       ['help', 'password=', 'email=', 'url=', 'uname='])
     except getopt.GetoptError, e:
         usage(e)
 
     password = ""
     email = ""
-    addy = ""
+    url = ""
     uname = ""
 
     for opt, val in opts:
@@ -46,7 +46,7 @@ def main():
             password = val
         elif opt == '--email':
             email = val
-        elif opt == '--addy':
+        elif opt == '--url':
             addy = val
         elif opt == '--username':
             uname = val
@@ -65,7 +65,7 @@ def main():
         if 'd' not in locals():
             d = Dialog('Turnkey Linux - First boot configuration')
         addy = d.get_input(
-            "Ghost URL (not IP address)",
+            "Ghost URL",
             "Enter the full URL of the Ghost Blog.",
             "http://my-ghost-blog.org")
 
