@@ -11,7 +11,7 @@ Summary
 
 * derived from TKL's Nodejs Appliance at https://github.com/turnkeylinux-apps/nodejs.
 
-* Tested on 0.7.8
+* Relies on Node 0.10.40 (http://support.ghost.org/supported-node-versions/)
 
 * to be used with with TklDev (https://www.turnkeylinux.org/tkldev) to generate bootable install ISO based on TKL Core <https://www.turnkeylinux.org/core>, which in turn is based on Debian "Jessie" 8.
 
