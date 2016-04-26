@@ -92,7 +92,7 @@ def main():
         cur = con.cursor()
 
         cur.execute('UPDATE roles_users SET role_id="4" WHERE id="1";')
-	cur.execute('UPDATE roles_users SET user_id="1" WHERE id="1";')
+        cur.execute('UPDATE roles_users SET user_id="1" WHERE id="1";')
         cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hash)
         cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
         cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
