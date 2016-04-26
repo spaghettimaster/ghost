@@ -4,9 +4,7 @@
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
---address= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
-
 """
 
 import sys
@@ -30,11 +28,10 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'address=', 'password=', 'email=', 'username='])
+                                       ['help', 'password=', 'email=', 'username='])
     except getopt.GetoptError, e:
         usage(e)
 
-    address = ""
     password = ""
     email = ""
     uname = ""
@@ -42,21 +39,12 @@ def main():
     for opt, val in opts:
         if opt in ('-h', '--help'):
             usage()
-        elif opt == '--address':
-            address = val
         elif opt == '--password':
             password = val
         elif opt == '--email':
             email = val
         elif opt == '--username':
             uname = val
-
-
-    if not address:
-        if 'd' not in locals():
-            d = Dialog('Turnkey Linux - First boot configuration')
-
-        address = d.get_input("Ghost URL","Enter the full URL of the Ghost Blog.","http://my-ghost-blog.com")
 
     if not password:
         d = Dialog('TurnKey Linux - First boot configuration')
@@ -67,7 +55,6 @@ def main():
 			d = Dialog('TurnKey Linux - First boot configuration')
 
         email = d.get_email("Ghost Email","Enter email address for the Ghost blogger account.","admin@example.com")
-
 
     if not uname:
         if 'd' not in locals():
@@ -82,9 +69,7 @@ def main():
 #hash = hashlib.md5(password).hexdigest()
 
 
-    for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
-        line = line.replace("http://my-ghost-blog.com", address)
-        print line
+
 
 
 
@@ -107,9 +92,9 @@ def main():
 
         con.commit()
 
-    for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
-        line = line.replace("http://my-ghost-blog.com", address)
-        print line
+    #for line in fileinput.FileInput("/opt/ghost/config.js",inplace=1):
+    #    line = line.replace("http://my-ghost-blog.com", address)
+    #    print line
 
 if __name__ == "__main__":
     main()
