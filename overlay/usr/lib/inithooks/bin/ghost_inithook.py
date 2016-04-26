@@ -65,19 +65,7 @@ def main():
             "Enter the Ghost blogger's name (real name recommended).",
             "Blogger Unknown")
 
-#Kept for reference
-#hash = hashlib.md5(password).hexdigest()
-
-
-
-
-
-
-
-
     hash = bcrypt.hashpw(password,bcrypt.gensalt())
-
-
 
     dbase = "/opt/ghost/content/data/ghost.db"
     #uid = "1"
