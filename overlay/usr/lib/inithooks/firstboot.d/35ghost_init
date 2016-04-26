@@ -5,6 +5,6 @@
 
 [ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
 
-$INITHOOKS_PATH/bin/ghost_inithook.py --uname --email --password
+$INITHOOKS_PATH/bin/ghost_inithook.py --username --email --password
 ghostdb=/opt/ghost/content/data/ghost.db
 chown node:node $ghostdb
