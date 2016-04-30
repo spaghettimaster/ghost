@@ -67,7 +67,7 @@ def main():
             "Blogger Unknown")
 
 
-        slug = uname.replace(" ", "-")
+        #slug = uname.replace(" ", "-")
 
 
     hash = bcrypt.hashpw(password,bcrypt.gensalt())
@@ -83,7 +83,7 @@ def main():
         cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
         cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
         cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
-        cur.execute('UPDATE users SET slug=\"%s\" WHERE id="1";' % slug)
+        #cur.execute('UPDATE users SET slug=\"%s\" WHERE id="1";' % slug)
         con.commit()
 
 if __name__ == "__main__":
