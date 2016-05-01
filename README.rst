@@ -51,6 +51,10 @@ Recommended User Configuration actions
 
     exit
 
+5. See markdown syntax `reference <https://daringfireball.net/projects/markdown/syntax>`_.
+
+
+
 To Do
 ======
 
