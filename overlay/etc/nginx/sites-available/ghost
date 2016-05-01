@@ -3,7 +3,7 @@ server {
     listen 0.0.0.0:443 ssl;
     server_name _;
 
-    set $nodeapp_port 2368;
+#    set $nodeapp_port 2368;
 #    include /etc/nginx/include/nodejs-proxy;
     include /etc/nginx/include/ssl;
     location / {
@@ -18,8 +18,3 @@ server {
        proxy_cache_bypass $http_upgrade;
      }
  }
-
-
-
-
-
