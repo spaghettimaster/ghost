@@ -11,7 +11,7 @@ Summary
 
 * derived from TKL's Nodejs Appliance at https://github.com/turnkeylinux-apps/nodejs.
 
-* Relies on Node 0.10.40 (http://support.ghost.org/supported-node-versions/)
+* Relies on Node 0.10.40 (recommended by Ghost documentation) (http://support.ghost.org/supported-node-versions/)
 
 * to be used with with TklDev (https://www.turnkeylinux.org/tkldev) to generate bootable install ISO based on TKL Core <https://www.turnkeylinux.org/core>, which in turn is based on Debian "Jessie" 8.
 
@@ -20,15 +20,36 @@ Details
 
 * Relies on `pm2 <http://pm2.keymetrics.io/>`_ for daemonization
 
+* admin interface at <ghost_url>/ghost: auto redirected to secure http (https)
+
+
+
 * In addition to packages installed by Nodjs appliance, installs *python-bcrypt* and *python-pysqlite2* (plan/main)
 
-* Installs *Ghost 0.7.8* from zip (conf.d/ghost)
+* Installs *Ghost 0.7.9* from zip (conf.d/ghost): configured to install latest stable.
 
 * Additional inithook prompts for initial Ghost blogger password and email address (credentials) as well as the URL of the Ghost instance. With that information, it prepares the sqlite3 database and ghost config. file (overlay/usr/lib/inithooks)
 
 * Configured for production environment rather than default dev env. Installs with npm install --production
 
 * Configured in /opt/ghost, owned by "node" user (su node)
+
+Recommended User Configuration actions
+========================================
+
+1. Change slug for account created at first boot (from ghost-owner) using the admin interface (user profile)
+
+2. Configure `email <http://support.ghost.org/mail>`_  (/opt/ghost/config.js)
+
+3. In preparation for first boot, have a domain secured and directed at the Ghost instance
+
+4. After any changes to /opt/ghost/config.js::
+
+    su node
+
+    pm2 restart ghost
+
+    exit
 
 To Do
 ======
