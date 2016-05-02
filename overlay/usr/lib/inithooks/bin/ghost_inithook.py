@@ -1,11 +1,11 @@
 #!/usr/bin/python
-"""Set Ghost email, name, password
+"""Set Ghost email, name, password, address
 
 Option:
 --password= unless provided, will ask interactively
 --email= unless provided, will ask interactively
 --uname= unless provided, will ask interactively
-
+--address= unless provided, will ask interactively
 """
 
 import sys
@@ -31,14 +31,14 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'uname=', 'addy='])
+                                       ['help', 'password=', 'email=', 'uname=', 'address='])
     except getopt.GetoptError, e:
         usage(e)
 
     password = ""
     email = ""
     uname = ""
-    addy = ""
+    address = ""
 
     for opt, val in opts:
         if opt in ('-h', '--help'):
@@ -49,29 +49,20 @@ def main():
             email = val
         elif opt == '--username':
             uname = val
-
-    if not addy:
+        elif opt == '--address':
+            address = val
+    if not address:
         offer = "https://example.com"
-        isvalid = ""
+        valid = ""
         config = "/opt/ghost/config.js"
 
         def check_url(addy):
             validity = validators.url(addy)
             return validity
 
-        d = Dialog('Turnkey Linux - First boot configuration')
-
         def address():
             addy = d.get_input("Ghost URL", "Enter the URL for the new Ghost blog (https recommended)", "https://example.com")
             return addy
-
-        addy = address()
-
-        valid = check_url(addy)
-
-        while not valid:
-            addy = address()
-            check_url(addy)
 
         def get_url(filein):
             f = open(filein, 'r')
@@ -80,7 +71,6 @@ def main():
             current_url = urls[2]
             current_url = current_url.translate(None, "',")
             return current_url
-
         def replace_url(old,new,fileout):
             config = None
             with open(fileout,'r') as file :
@@ -89,8 +79,13 @@ def main():
             with open(fileout, 'w') as file:
                 file.write(config)
             return 0
+
+        while not valid:
+            address = address()
+            valid = check_url(address)
+
         current_url = get_url(config)
-        replace_url(current_url,addy,config)
+        replace_url(current_url,address,config)
 
 
 
