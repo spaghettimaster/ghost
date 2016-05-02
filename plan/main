@@ -8,3 +8,4 @@ nginx
 
 python-bcrypt
 python-pysqlite2
+python-pip

@@ -32,3 +32,6 @@ cd $GHOST_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js; p
 # remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs
 rm $ZIP_TARGET
+
+# to validate URL
+pip install validators

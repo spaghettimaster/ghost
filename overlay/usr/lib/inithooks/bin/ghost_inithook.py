@@ -78,7 +78,7 @@ def main():
             f = f.read()
             urls = re.findall(r'(http[s]?://[^\s]+)', f)
             current_url = urls[2]
-            current_url = current.translate(None, "',")
+            current_url = current_url.translate(None, "',")
             return current_url
 
         def replace_url(old,new,fileout):
