@@ -18,8 +18,6 @@ import locale
 import dialog
 import fileinput
 from dialog_wrapper import Dialog
-import re
-import validators
 
 def usage(s=None):
     if s:
@@ -31,14 +29,13 @@ def usage(s=None):
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
-                                       ['help', 'password=', 'email=', 'uname=', 'addy='])
+                                       ['help', 'password=', 'email=', 'uname='])
     except getopt.GetoptError, e:
         usage(e)
 
     password = ""
     email = ""
     uname = ""
-    addy = ""
 
     for opt, val in opts:
         if opt in ('-h', '--help'):
@@ -49,51 +46,6 @@ def main():
             email = val
         elif opt == '--username':
             uname = val
-
-    if not addy:
-        offer = "https://example.com"
-        isvalid = ""
-        config = "/opt/ghost/config.js"
-
-        def check_url(addy):
-            validity = validators.url(addy)
-            return validity
-
-        d = Dialog('Turnkey Linux - First boot configuration')
-
-        def address():
-            addy = d.get_input("Ghost URL", "Enter the URL for the new Ghost blog (https recommended)", "https://example.com")
-            return addy
-
-        addy = address()
-
-        valid = check_url(addy)
-
-        while not valid:
-            addy = address()
-            check_url(addy)
-
-        def get_url(filein):
-            f = open(filein, 'r')
-            f = f.read()
-            urls = re.findall(r'(http[s]?://[^\s]+)', f)
-            current_url = urls[2]
-            current_url = current.translate(None, "',")
-            return current_url
-
-        def replace_url(old,new,fileout):
-            config = None
-            with open(fileout,'r') as file :
-                config = file.read()
-            config = config.replace(old,new)
-            with open(fileout, 'w') as file:
-                file.write(config)
-            return 0
-        current_url = get_url(config)
-        replace_url(current_url,addy,config)
-
-
-
 
     if not password:
         d = Dialog('TurnKey Linux - First boot configuration')
