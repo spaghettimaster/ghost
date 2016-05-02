@@ -63,8 +63,9 @@ def main():
         def address():
             d = Dialog('TurnKey Linux - First boot configuration')
 
-            addy = d.get_input("Ghost URL", "Enter the URL for the new Ghost blog (https recommended)", "https://example.com")
+            addy = d.get_input("Ghost URL", "Enter the URL for the new Ghost blog (https recommended). If the URL is not valid, please try again.", "https://example.com")
             return addy
+
 
         def get_url(filein):
             f = open(filein, 'r')
