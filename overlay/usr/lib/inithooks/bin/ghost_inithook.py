@@ -62,7 +62,7 @@ def main():
 
         def address():
             d = Dialog('TurnKey Linux - First boot configuration')
-            
+
             addy = d.get_input("Ghost URL", "Enter the URL for the new Ghost blog (https recommended)", "https://example.com")
             return addy
 
@@ -83,11 +83,11 @@ def main():
             return 0
 
         while not valid:
-            address = address()
-            valid = check_url(address)
+            addy = address()
+            valid = check_url(addy)
 
         current_url = get_url(config)
-        replace_url(current_url,address,config)
+        replace_url(current_url,addy,config)
 
 
 
