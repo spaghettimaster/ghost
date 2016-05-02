@@ -6,5 +6,6 @@
 [ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
 
 $INITHOOKS_PATH/bin/ghost_inithook.py
-ghostdb=/opt/ghost/content/data/ghost.db
-chown node:node $ghostdb
+
+#restart ghost to use newly defined URL
+su -c "cd /opt/ghost/ && pm2 restart ghost" node

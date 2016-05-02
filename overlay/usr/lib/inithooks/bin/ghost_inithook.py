@@ -20,6 +20,7 @@ import fileinput
 from dialog_wrapper import Dialog
 import re
 import validators
+import subprocess
 
 def usage(s=None):
     if s:
@@ -131,6 +132,8 @@ def main():
         cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
         #cur.execute('UPDATE users SET slug=\"%s\" WHERE id="1";' % slug)
         con.commit()
+
+    
 
 if __name__ == "__main__":
     main()
