@@ -36,3 +36,13 @@ rm $ZIP_TARGET
 
 # to validate URL
 pip install validators
+
+#mail
+
+old = "mail: {}:"
+
+indent = "    "
+
+
+
+sed -i.bak s/STRING_TO_REPLACE/STRING_TO_REPLACE_IT/g index.html
