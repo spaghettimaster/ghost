@@ -29,7 +29,6 @@ cd $GHOST_DIR && su -c "npm stop" $USER
 # pm2
 cd $GHOST_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js; pm2 dump" $USER
 
-#cd $GHOST_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js; pm2 dump; pm2 kill" $USER
 
 # remove conflicting nginx site (web-control)
 rm /etc/nginx/sites-enabled/nodejs

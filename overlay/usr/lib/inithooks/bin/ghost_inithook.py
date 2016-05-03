@@ -94,6 +94,7 @@ def main():
 
 
 
+
     if not password:
         d = Dialog('TurnKey Linux - First boot configuration')
         password = d.get_password("Ghost Password","Enter new password for the Ghost blogger account (>= 8 characters).")
@@ -133,7 +134,28 @@ def main():
         #cur.execute('UPDATE users SET slug=\"%s\" WHERE id="1";' % slug)
         con.commit()
 
-    
+    #mail config
+    def config_email(fileout):
+        old = "mail: {}"
+        indent = "    "
+        mail = "mail: {\n"
+        transport = indent + indent + indent + "transport: 'smtp',\n"
+        options = indent + indent + indent + "options: {\n"
+        service = indent + indent + indent + indent + "service: 'sendmail',\n"
+        inner_brace = indent + indent + indent + "}\n"
+        outer_brace = indent + indent + "},\n"
+        new = mail + transport + options + service + inner_brace + outer_brace
+        with open(fileout,'r') as file :
+            config = file.read()
+        config = config.replace(old,new)
+        with open(fileout, 'w') as file:
+            file.write(fileout)
+        return 0
+
+    config = '/opt/ghost/config.js'
+    config_email(config)
+
+
 
 if __name__ == "__main__":
     main()
