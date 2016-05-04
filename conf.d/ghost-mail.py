@@ -3,7 +3,7 @@
 import fileinput
 import re
 
-config = "./config.js"
+config = "/opt/ghost/config.js"
 old = "mail: {},"
 new = """
         mail: {
