@@ -33,6 +33,9 @@ TAB3="$TAB2    "
 TAB4="$TAB3    "
 OLD="mail: {},"
 NEW="mail: {${TAB3}transport: 'SMTP',${TAB3}options: {${TAB4}service: 'sendmail',${TAB3}}${TAB2}},"
+while [ ! -f $CONF ]; do
+    sleep 2
+done
 sed -i "s|$OLD|$NEW|" $CONF
 
 # to validate URL
