@@ -38,6 +38,3 @@ while [ ! -f $CONF ]; do
 done
 sed -i "s|$OLD|$NEW|" $CONF
 
-# to validate URL
-pip install validators
-
