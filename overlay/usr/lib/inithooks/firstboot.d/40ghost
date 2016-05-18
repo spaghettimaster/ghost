@@ -1,0 +1,17 @@
+#!/bin/bash -e
+# initialize Ghost
+
+. /etc/default/inithooks
+
+[ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
+
+if [ -z "$APP_UNAME" ]; then
+    if [ -n "$APP_PASS" ] && [ -n "$APP_EMAIL" ] && [ -n "$APP_DOMAIN" ]; then
+        APP_UNAME="DEFAULT"
+    fi
+fi
+
+$INITHOOKS_PATH/bin/ghost.py --pass="$APP_PASS" --uname="$APP_UNAME" --email="$APP_EMAIL" --domain="$APP_DOMAIN"
+
+#restart ghost to use newly defined URL
+su -c "cd /opt/ghost/ && pm2 restart ghost" node

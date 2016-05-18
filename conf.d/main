@@ -1,38 +1,40 @@
 #!/bin/bash -ex
 
+###Config Vars
 USER=node
-NODEAPP=/opt/tklweb-cp
-EXAMPLES=/opt/node-examples
+INSTALL_DIR="/opt/ghost"
+SRC="/usr/local/src/ghost-latest.zip"
 
-# setup tklweb-cp
-mkdir -p $NODEAPP/public/javascripts
-mkdir -p $NODEAPP/public/stylesheets
-mkdir -p $NODEAPP/public/images
-mv /var/www/js/* $NODEAPP/public/javascripts/
-mv /var/www/css/* $NODEAPP/public/stylesheets/
-mv /var/www/images/* $NODEAPP/public/images/
-rm -rf /var/www/{js,css,images}
+unzip $SRC -d $INSTALL_DIR/
+rm $SRC
 
-chown -R $USER:$USER $NODEAPP
+#Set node version (0.10.40 confirmed to work); open to higher version
+n 0.10.40
 
-# install deps
-su $USER -lc "[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY; cd $NODEAPP && npm install"
+# based on basic documented install
+chown -R $USER:$USER $INSTALL_DIR
+cd $INSTALL_DIR && su -c "npm install --production" $USER
 
-#line for node appliance control panel
-#su node -lc "cd $NODEAPP && pm2 start tklweb-cp.js; sleep 5; pm2 dump; pm2 kill"
+#ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
+ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
+rm /etc/nginx/sites-enabled/nodejs
 
-# install examples
-mkdir -p $EXAMPLES
-cd $EXAMPLES
+#Creates current db
+cd $INSTALL_DIR && su -c "nohup npm start --production &" $USER
+cd $INSTALL_DIR && su -c "npm stop" $USER
 
-for i in Hendrik/node-by-example shapeshed/express_example shapeshed/nodejsbook.io.examples azat-co/practicalnode; do
-    git clone "https://github.com/$i.git"
+# pm2
+cd $INSTALL_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js; pm2 dump" $USER
+
+# configure ghost to use postfix
+CONF="/opt/ghost/config.js"
+TAB2="\n        "
+TAB3="$TAB2    "
+TAB4="$TAB3    "
+OLD="mail: {},"
+NEW="mail: {${TAB3}transport: 'SMTP',${TAB3}options: {${TAB4}service: 'sendmail',${TAB3}}${TAB2}},"
+while [ ! -f $CONF ]; do
+    sleep 2
 done
+sed -i "s|$OLD|$NEW|" $CONF
 
-cd practicalnode
-rm -rf .git
-find -type d -name node_modules -exec rm -rf \{} \+
-
-chown -R $USER:$USER $EXAMPLES
-
-rm -rf /tmp/npm*

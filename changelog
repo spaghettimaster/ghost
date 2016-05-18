@@ -1,1 +1,11 @@
-first entry
+turnkey-ghost-14.1 (1) turnkey; urgency=low
+ 
+  * Initial build of TurnKey Ghost appliance.
+
+    - Production ready
+    - uses default sqlite DB backend
+    - configured to use local postfix to send emails
+
+  * Based os TurnKey Nodejs appliance.
+
+ -- Rik Goldman <rikgoldman@gmail.com>  Wed, 04 May 2016 17:44:59 +0100
