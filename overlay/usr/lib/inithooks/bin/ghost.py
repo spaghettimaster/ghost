@@ -14,7 +14,8 @@ import bcrypt
 import sqlite3
 from dialog_wrapper import Dialog
 import re
-import validators
+
+DEFAULT_UNAME = 'Blogger Unknown'
 
 def usage(s=None):
     if s:
@@ -63,14 +64,17 @@ def main():
             "Please enter email address for the Ghost blogger account.",
             "admin@example.com")
 
-	if not uname:
-		if 'd' not in locals():
-			d = Dialog('Turnkey Linux - First boot configuration')
+    if not uname:
+        if 'd' not in locals():
+	    d = Dialog('Turnkey Linux - First boot configuration')
 
-		uname = d.get_input(
-			"Ghost Account Name",
-			"Enter the Ghost blogger's name (real name recommended).",
-			"Blogger Unknown")
+	uname = d.get_input(
+		"Ghost Account Name",
+		"Enter the Ghost blogger's name (real name recommended).",
+		DEFAULT_UNAME)
+
+    if uname == "DEFAULT":
+        uname = DEFAULT_UNAME
 
     if not domain:
         if 'd' not in locals():
