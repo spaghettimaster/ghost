@@ -9,9 +9,9 @@ application with an Ember.js admin client and Handlebars.js themes.
 This appliance includes all the standard features in `TurnKey Core`_,
 and on top of that:
 
-- Ghost:
+- Ghost configurations:
 
-   - Installed from upstream source code to /opt/ghost
+   - Ghost installed from upstream source code to /opt/ghost
 
      **Security note**: Updates to Ghost may require supervision so
      they **ARE NOT** configured to install automatically. See below for
@@ -19,7 +19,7 @@ and on top of that:
 
    
    - Ghost process managed by `pm2`_.
-   - Proxied by Nginx (webserver).
+   - Includes Nginx (webserver); pre-configured to proxy Ghost.
 
 - SSL support out of the box.
 - Postfix MTA (bound to localhost) to allow sending of email (e.g.,
@@ -29,12 +29,12 @@ and on top of that:
 Supervised Manual Ghost Update
 ------------------------------
 
-Note: Check the version you have install and ensure that upgrading to 
-      the latest version is supported. Always enure that you have a 
-      current backup before proceeding with software updates.
+**Note:** Check the Ghost docs to ensure that upgrading your 
+current version to the latest is supported. Always enure that 
+you have a tested backup before proceeding with software updates.
 
-Assuming that updating the latest Ghost version is supported. update 
-from the command line::
+Assuming that updating to the latest Ghost version is supported. 
+update from the command line::
 
     DIR=/opt/ghost
     cd $DIR
@@ -65,7 +65,7 @@ Credentials *(passwords set at first boot)*
 
 
 .. _Ghost: https://ghost.org/
-.. _TurnKey Nodejs: https://www.turnkeylinux.org/nodejs
+.. _TurnKey Core: https://www.turnkeylinux.org/core
 .. _pm2: http://pm2.keymetrics.io/
 .. _Ghost Blog: https://blog.ghost.org/
 
