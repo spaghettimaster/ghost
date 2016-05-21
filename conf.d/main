@@ -13,21 +13,19 @@ n 0.10.40
 
 # based on basic documented install
 chown -R $USER:$USER $INSTALL_DIR
-cd $INSTALL_DIR && su -c "npm install --production" $USER
+cd $INSTALL_DIR
+su -c "npm install --production" $USER
 
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 rm /etc/nginx/sites-enabled/nodejs
 
-#Creates current db
-cd $INSTALL_DIR && su -c "nohup npm start --production &" $USER
-cd $INSTALL_DIR && su -c "npm stop" $USER
-
 # pm2
-cd $INSTALL_DIR && su -c "NODE_ENV=production pm2 start --name 'ghost' index.js; pm2 dump" $USER
+cd $INSTALL_DIR
+su -c "NODE_ENV=production pm2 start --name 'ghost' index.js" $USER
 
 # configure ghost to use postfix
-CONF="/opt/ghost/config.js"
+CONF="$INSTALL_DIR/config.js"
 TAB2="\n        "
 TAB3="$TAB2    "
 TAB4="$TAB3    "
@@ -38,3 +36,5 @@ while [ ! -f $CONF ]; do
 done
 sed -i "s|$OLD|$NEW|" $CONF
 
+cd $INSTALL_DIR
+su -c "pm2 dump" node
