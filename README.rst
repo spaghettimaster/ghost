@@ -30,7 +30,7 @@ Supervised Manual Ghost Update
 ------------------------------
 
 **Note:** Check the Ghost docs to ensure that upgrading your 
-current version to the latest is supported. Always enure that 
+current version to the latest is supported. Always ensure that 
 you have a tested backup before proceeding with software updates.
 
 Assuming that updating to the latest Ghost version is supported. 
