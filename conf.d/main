@@ -8,8 +8,8 @@ SRC="/usr/local/src/ghost-latest.zip"
 unzip $SRC -d $INSTALL_DIR/
 rm $SRC
 
-#Set node version (0.10.40 confirmed to work); open to higher version
-n 0.10.40
+#Set node version (6.9.0 confirmed to work); open to higher version
+n 6.9.0
 
 # based on basic documented install
 chown -R $USER:$USER $INSTALL_DIR
