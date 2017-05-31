@@ -1,13 +1,18 @@
 turnkey-ghost-14.2 (1) turnkey; urgency=low
 
-  * Ghost Node.js requirement updated to v6.9.0
+  * Updated Ghost to latest upstream version.
+
+  * Replaced pm2 with both a systemd unit file and a sysvinit script for
+    starting/stopping ghost.
+
+  * Provides NodeJS 6.11.0 LTS.
 
   * Installed security updates.
 
   * Note: Please refer to turnkey-core's changelog for changes common to all
     appliances. Here we only describe changes specific to this appliance.
 
- -- Anton Pyrogovskyi <anton@turnkeylinux.org>  Mon, 17 Apr 2017 00:50:19 +0000
+ -- Stefan Davis <stefan@turnkeylinux.org>  Fri, 09 Jun 2017 10:50:19 +1000
 
 turnkey-ghost-14.1 (1) turnkey; urgency=low
  
