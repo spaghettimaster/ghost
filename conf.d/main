@@ -18,11 +18,12 @@ su -c "npm install --production" $USER
 
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
-rm /etc/nginx/sites-enabled/nodejs
 
 # pm2
 cd $INSTALL_DIR
-su -c "NODE_ENV=production pm2 start --name 'ghost' index.js" $USER
+#PID=$(su -c "NODE_ENV=production npm start --name 'ghost' index.js& echo $!" $USER)
+systemctl enable ghost
+service ghost start
 
 # configure ghost to use postfix
 CONF="$INSTALL_DIR/config.js"
@@ -37,4 +38,6 @@ done
 sed -i "s|$OLD|$NEW|" $CONF
 
 cd $INSTALL_DIR
-su -c "pm2 dump" node
+#su -c "kill $PID" $USER
+#su -c "pm2 dump" node
+service ghost stop
