@@ -5,39 +5,27 @@ USER=node
 INSTALL_DIR="/opt/ghost"
 SRC="/usr/local/src/ghost-latest.zip"
 
-unzip $SRC -d $INSTALL_DIR/
-rm $SRC
-
 #Set node version (6.9.0 confirmed to work); open to higher version
 n 6.9.0
 
 # based on basic documented install
+mkdir $INSTALL_DIR
 chown -R $USER:$USER $INSTALL_DIR
 cd $INSTALL_DIR
-su -c "npm install --production" $USER
+npm i -g ghost-cli
+ghost install local
+ghost stop
 
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
 
-# pm2
-cd $INSTALL_DIR
-#PID=$(su -c "NODE_ENV=production npm start --name 'ghost' index.js& echo $!" $USER)
-systemctl enable ghost
-service ghost start
+systemctl enable ghost_blog
 
 # configure ghost to use postfix
-CONF="$INSTALL_DIR/config.js"
-TAB2="\n        "
-TAB3="$TAB2    "
-TAB4="$TAB3    "
-OLD="mail: {},"
-NEW="mail: {${TAB3}transport: 'SMTP',${TAB3}options: {${TAB4}service: 'sendmail',${TAB3}}${TAB2}},"
+CONF="$INSTALL_DIR/config.development.json"
+OLD='"transport": "Direct"'
+NEW='"transport": "sendmail"'
 while [ ! -f $CONF ]; do
-    sleep 2
+   sleep 2
 done
 sed -i "s|$OLD|$NEW|" $CONF
-
-cd $INSTALL_DIR
-#su -c "kill $PID" $USER
-#su -c "pm2 dump" node
-service ghost stop
