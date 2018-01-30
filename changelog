@@ -13,8 +13,6 @@ turnkey-ghost-15.0 (1) turnkey; urgency=low
 
  -- Vlad Kuzmenko <vlad.work.here@gmail.com>  Thu, 25 Jan 2018 00:38:42 +0200
 
-
-
 turnkey-ghost-14.2 (1) turnkey; urgency=low
 
   * Updated Ghost to latest upstream version.
