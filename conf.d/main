@@ -3,7 +3,6 @@
 ###Config Vars
 USER=node
 INSTALL_DIR="/opt/ghost"
-SRC="/usr/local/src/ghost-latest.zip"
 
 #Set node version (6.9.0 confirmed to work); open to higher version
 n 6.9.0
@@ -11,10 +10,12 @@ n 6.9.0
 # based on basic documented install
 mkdir $INSTALL_DIR
 chown -R $USER:$USER $INSTALL_DIR
-cd $INSTALL_DIR
-npm i -g ghost-cli
+
+npm i -g ghost-cli@1.5.2
+
+su - $USER -c "cd $INSTALL_DIR
 ghost install local
-ghost stop
+ghost stop"
 
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
