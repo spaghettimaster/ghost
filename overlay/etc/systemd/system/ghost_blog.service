@@ -4,7 +4,7 @@ Description=Ghost systemd service
 [Service]
 Type=simple
 WorkingDirectory=/opt/ghost
-User=root
+User=node
 Environment="NODE_ENV=development"
 ExecStart=/usr/local/bin/ghost run
 Restart=always
