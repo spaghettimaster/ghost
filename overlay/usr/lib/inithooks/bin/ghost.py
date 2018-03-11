@@ -14,6 +14,7 @@ import sqlite3
 from dialog_wrapper import Dialog
 import re
 import os
+from mysqlconf import MySQL
 
 DEFAULT_UNAME = 'Blogger Unknown'
 
@@ -88,30 +89,26 @@ def main():
         if not domain.startswith('https://') and not domain.startswith('http://'):
             domain = 'https://'+domain
 
-    with open('/opt/ghost/config.development.json', 'r') as fob:
+    with open('/opt/ghost/config.production.json', 'r') as fob:
         all_config = fob.read()
 
     current_url = re.findall(r'(https?://\S+)', all_config)[0] # third occurance in file
     current_url = current_url.translate(None, "\",")
     all_config = all_config.replace(current_url, domain)
 
-    with open('/opt/ghost/config.development.json', 'w') as fob:
+    with open('/opt/ghost/config.production.json', 'w') as fob:
         fob.write(all_config)
 
 
     hashed_pw = bcrypt.hashpw(password, bcrypt.gensalt())
 
-    dbase = '/opt/ghost/content/data/ghost-local.db'
-    con = sqlite3.connect(dbase)
-    with con:
-        cur = con.cursor()
+    cur = MySQL()
+    cur.execute('UPDATE ghost.users SET password=\"%s\" WHERE id="1";' % hashed_pw)
+    cur.execute('UPDATE ghost.users SET name=\"%s\" WHERE id="1";' % uname)
+    cur.execute('UPDATE ghost.users SET email=\"%s\" WHERE id="1";' % email)
+    cur.execute('UPDATE ghost.users SET status=\"active\" WHERE id="1";')
 
-        cur.execute('UPDATE users SET password=\"%s\" WHERE id="1";' % hashed_pw)
-        cur.execute('UPDATE users SET name=\"%s\" WHERE id="1";' % uname)
-        cur.execute('UPDATE users SET email=\"%s\" WHERE id="1";' % email)
-        cur.execute('UPDATE users SET status=\"active\" WHERE id="1";')
-        con.commit()    
-    os.system("service ghost_blog restart")
+    os.system("service ghost_localhost restart")
 
 if __name__ == '__main__':
     main()

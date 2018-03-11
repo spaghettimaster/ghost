@@ -1,32 +1,33 @@
 #!/bin/bash -ex
 
 ###Config Vars
+DB_NAME=ghost
+DB_USER=ghost
+DB_PASS=$(mcookie)
+
 USER=node
 INSTALL_DIR="/opt/ghost"
+
+CHECK_USER="/usr/local/lib/node_modules/ghost-cli/lib/utils/check-root-user.js"
+
+service mysql start
+
+#Create mysql user and table
+mysql --user=root --password=$MYSQL_PASS --batch --execute "CREATE DATABASE $DB_NAME; GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER ON $DB_NAME.* TO $DB_USER@localhost IDENTIFIED BY '$DB_PASS'; FLUSH PRIVILEGES;"
 
 #Set node version (6.9.0 confirmed to work); open to higher version
 n 6.9.0
 
-# based on basic documented install
 mkdir $INSTALL_DIR
-chown -R $USER:$USER $INSTALL_DIR
 
 npm i -g ghost-cli@1.5.2
 
-su - $USER -c "cd $INSTALL_DIR
-ghost install local
-ghost stop"
+sed -i '/function checkRootUser/a return 0;' $CHECK_USER
+sed -i '/const isRootInstall/a return 0;' $CHECK_USER
+
+cd $INSTALL_DIR
+
+ghost install --url=http://localhost:2368 --db=mysql --dbhost=localhost --dbuser=ghost --dbpass=$DB_PASS --dbname=ghost --no-prompt --mail=sendmail --no-stack || true
 
 #ghost runs on 2368. Proxy to port 80 and port 443 (SSL/TLS)
 ln -s /etc/nginx/sites-available/ghost /etc/nginx/sites-enabled/ghost
-
-systemctl enable ghost_blog
-
-# configure ghost to use postfix
-CONF="$INSTALL_DIR/config.development.json"
-OLD='"transport": "Direct"'
-NEW='"transport": "sendmail"'
-while [ ! -f $CONF ]; do
-   sleep 2
-done
-sed -i "s|$OLD|$NEW|" $CONF
